@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@100&family=Open+Sans&family=Oswald:wght@300;500&family=Poppins&family=Rowdies&display=swap");
+
+body {
+  background-color: black;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navigation {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  vertical-align: middle;
+  margin: 24px;
+  margin-left: 64px;
+}
+
+.logo {
+  font-size: x-large;
+  font-weight: bolder;
+  margin-right: 64px;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline-block;
+  min-width: 200px;
+  text-decoration: none;
+  color: gray;
+  border-bottom: 2px solid gray;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin: 20px;
+  text-align: left;
+  padding: 4px;
+}
+
+.nav-links li:hover,
+.nav-links li:focus,
+.nav-links li.active {
+  color: white;
+  font-weight: bold;
+  border-bottom-color: white;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: gray;
+}
+
+.nav-links li a.active,
+.nav-links li a:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.sign_up {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+}
+
+.sign_up button {
+  display: inline-block;
+  min-width: 200px;
+  text-decoration: none;
+  color: white;
+  background-color: transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  /* margin: 20px; */
+
+  margin-left: 100px;
+  border: 2px solid transparent;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  padding: 4px;
+}
+
+.sign_up .btn a:hover,
+.sign_up .btn a.focus,
+.sign_up .btn a.active {
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  padding: 4px 16px;
+}
+.sign_up .btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.diagnoseBody{
+  height: 50%;
+}
+
+.diagnoseBody .body-image {
+  justify-content: center;
+  align-items: center;
+  height: 100vw;
+  position: relative;
+}
+
+.diagnoseBody .full-body img{
+  opacity: 20%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40%;
+}
+
+.diagnoseBody .head {
+  opacity: 20%;
+  position: absolute;
+  top: -1%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 5%;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.diagnoseBody .head img{
+  height: 40%;
+}
+
+.diagnoseBody .lungs {
+  opacity: 20%;
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 13%;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.diagnoseBody .lungs img{
+  height: 40%;
+}
+
+.diagnoseBody .head:hover {
+  opacity: 100%;
+}
+
+.diagnoseBody .lungs:hover {
+  opacity: 100%;
+}

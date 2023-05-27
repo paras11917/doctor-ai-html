@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="DiagnoseHome.css" />
+  <title>Image Analysis</title>
+</head>
+
+<body>
+  <nav class="navigation">
+    <div class="logo">DOCTO.AI</div>
+    <ul class="nav-links">
+      <li>
+        <a href="../index.html"><span>Home</span></a>
+      </li>
+      <li class="active">
+        <a href="./ImageDiagnosis.html"><span> Image Diagnosis
+          </span></a>
+      </li>
+      <li>
+        <a><span>Symptom Diagnosis</span></a>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div class="drop-menu">
+    <h2>Results</h2>
+    <h4 id="name"></h4>
+    <p id="result"></p>
+    <div class="selected-content">
+      <button class="btn">Take another Diagnosis</button>
+    </div>
+  </div>
+  <script>
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+      return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    var data = getParameterByName('txt')
+    console.log(data)
+    document.getElementById('result').innerHTML = data.description
+    document.getElementById('name').innerHTML = data.name
+
+  </script>
+</body>
+
+</html>

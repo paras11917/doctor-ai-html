@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="DiagnoseHome.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <title>Image Analysis</title>
+</head>
+
+<body>
+
+
+  <nav class="navigation">
+    <div class="logo">DOCTO.AI</div>
+    <ul class="nav-links">
+      <li>
+        <a href="../index.html"><span>Home</span></a>
+      </li>
+      <li class="active">
+        <a><span> Image Diagnosis
+          </span></a>
+      </li>
+      <li>
+        <a><span>Symptom Diagnosis</span></a>
+      </li>
+    </ul>
+
+  </nav>
+
+
+  <div class="drop-menu">
+    <p>Select a Image you want to diagnose</p>
+    <select>
+      <option value="option1">Select</option>
+      <option value="option2">CT Scan</option>
+      <option value="option3">MRI</option>
+    </select>
+
+    <div class="selected-content">
+      <div class="img-box" id="image-output">
+        <input type="file" id="image-input" class="">Upload images here</input>
+      </div>
+      <button id="btn" class="btn">Diagnose</button>
+      <h2 id="txt" style="color: white;"></h2>
+    </div>
+
+    <script>
+      // disc.alzheimer_types[i].name
+      // disc.alzheimer_types[i].description
+      // disc.alzheimer_types[i].symptoms[].name disc.alzheimer_types[i].symptoms[].description
+      // disc.alzheimer_types[i].treatment[].name disc.alzheimer_types[i].treatment[].description
+      const dis = ['no', 'yes']
+
+      const disc = ['No symptoms found', 'Symptoms of pneumonia can include Coughing that produces phlegm Fever Chest pain when breathing or coughing Shortness of breath  Fatigue Sweating Loss of appetite         Confusion(especially in older adults) ']
+
+
+      const imageInput = document.getElementById('image-input');
+      const imageOutput = document.getElementById('image-output');
+      const btn = document.getElementById('btn');
+      const txt = document.getElementById('txt');
+      const img = new Image();
+
+      imageInput.addEventListener('change', async () => {
+        const file = imageInput.files[0];
+        const imgUrl = URL.createObjectURL(file);
+        img.src = imgUrl;
+        await img.decode();
+      })
+      btn.addEventListener('click', async () => {
+        const tensor = tf.browser.fromPixels(img)
+        const expandedTensor = tensor.expandDims();
+        const resizedTensor = tf.image.resizeBilinear(expandedTensor, [64, 64])
+
+        const model = await tf.loadLayersModel('../pneumonia_model_tfjs_model/model.json');
+        const prediction = model.predict(resizedTensor)
+        if (prediction) {
+          prediction.print();
+          console.log(prediction)
+          data = prediction.dataSync()
+          console.log(data)
+          var txtt
+          for (var i = 0; i < 2; i++) {
+            if (data[i] == 1) {
+              txtt = disc[i];
+            }
+          }
+          console.log(txtt)
+          txt.innerText = txtt;
+        }
+      }
+      )
+
+    </script>
+  </div>
+</body>
+
+</html>

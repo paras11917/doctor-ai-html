@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="DiagnoseHome.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <title>Image Analysis</title>
+</head>
+
+<body>
+
+  <nav class="navigation">
+    <div class="logo">DOCTO.AI</div>
+    <ul class="nav-links">
+      <li>
+        <a href="../index.html"><span>Home</span></a>
+      </li>
+      <li class="active">
+        <a><span> Image Diagnosis
+          </span></a>
+      </li>
+      <li>
+        <a><span>Symptom Diagnosis</span></a>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div class="drop-menu">
+
+    <div class="selected-content">
+      <div class="imgtag" id="image-output">
+        <input type="file" id="image-input" class="img-box">Upload images here</input>
+      </div>
+
+      <button id="btn" class="btn">Diagnose</button>
+      <h2 id="txt" style="color: white;"></h2>
+    </div>
+
+    <script>
+      // disc.alzheimer_types[i].name
+      // disc.alzheimer_types[i].description
+      // disc.alzheimer_types[i].symptoms[].name disc.alzheimer_types[i].symptoms[].description
+      // disc.alzheimer_types[i].treatment[].name disc.alzheimer_types[i].treatment[].description
+
+      const disc = [
+        {
+          "name": "MildDemented, This stage refers to individuals who show mild symptoms of dementia, such as confusion and difficulty with problem-solving and planning. Symptoms of mild dementia include increasing forgetfulness, difficulty with problem-solving and planning, and difficulty with daily activities such as managing finances or driving. In addition to medications and cognitive training, individuals with mild dementia may benefit from occupational therapy and other interventions to help maintain independence and improve quality of life. Caregiver support is also important at this stage."
+        },
+        {
+          "name": "ModerateDemented This stage refers to individuals who show moderate symptoms of dementia, such as significant memory loss, difficulty with daily activities, and changes in behavior. Symptoms of moderate dementia include significant memory loss, difficulty with daily activities such as dressing and bathing, changes in behavior such as agitation or aggression, and difficulty with communication. At this stage, medications may be used to manage symptoms, and individuals may require more intensive care and support from caregivers or healthcare professionals. Palliative care may also be appropriate to manage symptoms and improve quality of life."
+        },
+        {
+          "name": "NonDemented, This stage refers to individuals who do not show any signs of dementia. There are no symptoms associated with this stage of Alzheimer's disease. There is no specific treatment for this stage of Alzheimer's disease. However, maintaining a healthy lifestyle and engaging in activities that promote mental and physical well-being can help reduce the risk of developing dementia in the future."
+        },
+        {
+          "name": "VeryMildDemented This stage refers to individuals who show very mild symptoms of dementia, such as memory lapses and difficulty with language. Symptoms of very mild dementia include forgetfulness, difficulty finding words, and difficulty with tasks that require planning and organization. There is no cure for Alzheimer's disease, but medications such as cholinesterase inhibitors may be prescribed to help manage symptoms in the early stages of the disease. Cognitive training and other interventions may also be helpful in managing symptoms."
+        },
+      ]
+
+      const imageInput = document.getElementById('image-input');
+      const imageOutput = document.getElementById('image-output');
+      const btn = document.getElementById('btn');
+      const op = document.getElementById('txt');
+      const img = new Image();
+
+      imageInput.addEventListener('change', async () => {
+        //const imagePath = 'dog1.png';
+        const file = imageInput.files[0];
+        const imgUrl = URL.createObjectURL(file);
+        img.src = imgUrl;
+        await img.decode();
+      })
+      btn.addEventListener('click', async () => {
+        const tensor = tf.browser.fromPixels(img)
+        const expandedTensor = tensor.expandDims();
+        const resizedTensor = tf.image.resizeBilinear(expandedTensor, [224, 224])
+
+        const model = await tf.loadLayersModel('../alzheimer_model_tfjs_model/model.json');
+        const prediction = model.predict(resizedTensor)
+        if (prediction) {
+          prediction.print();
+          console.log(prediction)
+          data = prediction.dataSync()
+          console.log(data)
+          var txt = ""
+          for (let i = 0; i < 4; i++) {
+            if (data[i] === 1) {
+              txt = disc[i]
+              break
+            }
+          }
+          console.log(txt)
+          op.innerHTML = txt.name
+        }
+      })
+
+    </script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@100&family=Open+Sans&family=Oswald:wght@300;500&family=Poppins&family=Rowdies&display=swap");
+
+body {
+  background-color: black;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navigation {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  vertical-align: middle;
+  margin: 24px;
+  margin-left: 64px;
+}
+
+.logo {
+  font-size: x-large;
+  font-weight: bolder;
+  margin-right: 64px;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline-block;
+  min-width: 200px;
+  text-decoration: none;
+  color: gray;
+  border-bottom: 2px solid gray;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin: 20px;
+  text-align: left;
+  text-decoration: none;
+  padding: 4px;
+}
+
+.nav-links li:hover,
+.nav-links li:focus,
+.nav-links li.active {
+  color: white;
+  font-weight: bold;
+  border-bottom-color: white;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: gray;
+}
+
+.nav-links li a.active,
+.nav-links li a:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.sign_up {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+}
+
+.sign_up button {
+  display: inline-block;
+  min-width: 200px;
+  text-decoration: none;
+  color: white;
+  background-color: transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  /* margin: 20px; */
+
+  margin-left: 100px;
+  border: 2px solid transparent;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  padding: 4px;
+}
+
+.sign_up .btn a:hover,
+.sign_up .btn a.focus,
+.sign_up .btn a.active {
+  background-color: white;
+  border: 2px solid white;
+  color: black;
+  padding: 4px 16px;
+}
+.sign_up .btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  margin-left: 128px;
+}
+
+.features-header {
+  width: 100%;
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: white;
+  text-align: start;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.features-item {
+  width: 80%;
+  color: white;
+}
+
+.features-item-header {
+  font-size: 16px;
+}
+
+.features-item-description {
+  font-size: 12px;
+}
+
+.features-item-list {
+  font-size: 16px;
+}
+
+.features-button {
+  width: 80%;
+  font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 15px 30px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+.features-button:hover {
+  background-color: #0069d9;
+}
+
+.body-image {
+  position: relative;
+  right: -10%;
+  justify-content: center;
+  margin-left: 40px;
+  align-items: center;
+}
+.body-image img {
+  height: 40%;
+}
